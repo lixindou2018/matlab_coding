@@ -7,6 +7,7 @@ clear;
 main_path='H:/project/resize/train/';
 save_path='H:/project/resize/train/';
 
+%直接读取某个文件夹下面的所有图片路径
 files=st.allimage(main_path);
 list_file=[main_path,'train_pos.txt'];
 fid=fopen(list_file,'w+');  %重新写入，不存在自动创建
@@ -14,7 +15,7 @@ for imageIdx=1:length(files)
     fprintf(fid,'%s\r\n',[save_path files{imageIdx}]);
 end;
 
-%多级目录
+%多级目录，用下面代码
 folder=st.allfolder(main_path);
 list_file=[main_path 'trian_pos.txt'];
 fid=fopen(list_file,'w+');             %
