@@ -6,16 +6,24 @@ clc;
 clear;
 main_path='H:/project/resize/train/';
 save_path='H:/project/resize/train/';
-folder=st.allfolder(main_path)
 
+files=st.allimage(main_path);
+list_file=[main_path,'train_pos.txt'];
+fid=fopen(list_file,'w+');  %重新写入，不存在自动创建
+for imageIdx=1:length(files)
+    fprintf(fid,'%s\r\n',[save_path files{imageIdx}]);
+end;
+
+%多级目录
+folder=st.allfolder(main_path);
 list_file=[main_path 'trian_pos.txt'];
-fid=fopen(list_file,'a+');             %
+fid=fopen(list_file,'w+');             %
 for folderIdx=1:length(folder)
     subfolder=st.allfolder([main_path folder{folderIdx}]);
     for subfolderIdx=1:length(subfolder)
         files=st.allimage([main_path folder{folderIdx} '/' subfolder{subfolderIdx}])
             for imageIdx=1:length(files)
-                fprintf(fid,'%s\r\n',[save_path folder{folderIdx} '/' subfolder{subfolderIdx}])
+                fprintf(fid,'%s\r\n',[save_path folder{folderIdx} '/' subfolder{subfolderIdx} '/' files{imageIdx}]);
             end;
     end;
 end;
